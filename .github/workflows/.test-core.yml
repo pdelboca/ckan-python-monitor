@@ -34,10 +34,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
+    - uses: actions/checkout@v3
+    - name: Clone extension
       run: |
-        git clone https://github.com/ckan/ckan.git
+        git clone https://github.com/ckan/ckanext-archiver.git
     - name: Install dependencies
       run: |
         cd ckan
