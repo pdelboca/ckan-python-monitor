@@ -47,8 +47,7 @@ jobs:
         pip install -r requirement-setuptools.txt
         pip install -r requirements.txt
         pip install -r dev-requirements.txt
-        python3 setup.py develop
-        pip3 check
+        pip install -e .
     - name: Execute test
       run: |
         cd ckan
