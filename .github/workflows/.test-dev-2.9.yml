@@ -60,4 +60,4 @@ jobs:
         run: |
           cd ckan
           ckan -c test-core.ini db init
-          pytest --ckan-ini=test-core.ini ckan/test ckanext
+          pytest --ckan-ini=test-core.ini ckan/tests ckanext
