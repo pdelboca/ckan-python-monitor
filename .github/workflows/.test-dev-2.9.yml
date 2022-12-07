@@ -26,6 +26,7 @@ jobs:
           git checkout dev-v2.9
       - name: Install requirements
         run: |
+          cd ckan
           pip install -r requirement-setuptools.txt
           pip install -r requirements-py2.txt
           pip install -r dev-requirements.txt
