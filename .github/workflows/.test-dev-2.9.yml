@@ -13,6 +13,8 @@ jobs:
     services:
       solr:
         image: ckan/ckan-solr:master
+        ports:
+          - 8983:8983
       postgres:
         image: ckan/ckan-postgres-dev:master
         env:
@@ -20,14 +22,18 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        ports:
+          - 5432:5432
       redis:
-          image: redis:3
+        image: redis:3
+        ports:
+          - 6379:6379
     env:
-      CKAN_SQLALCHEMY_URL: postgresql://ckan_default:pass@postgres/ckan_test
-      CKAN_DATASTORE_WRITE_URL: postgresql://datastore_write:pass@postgres/datastore_test
-      CKAN_DATASTORE_READ_URL: postgresql://datastore_read:pass@postgres/datastore_test
-      CKAN_SOLR_URL: http://solr:8983/solr/ckan
-      CKAN_REDIS_URL: redis://redis:6379/1
+      CKAN_SQLALCHEMY_URL: postgresql://ckan_default:pass@localhost/ckan_test
+      CKAN_DATASTORE_WRITE_URL: postgresql://datastore_write:pass@localhost/datastore_test
+      CKAN_DATASTORE_READ_URL: postgresql://datastore_read:pass@localhost/datastore_test
+      CKAN_SOLR_URL: http://localhost:8983/solr/ckan
+      CKAN_REDIS_URL: redis://localhost:6379/1
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -53,4 +59,5 @@ jobs:
       - name: Execute tests
         run: |
           cd ckan
+          ckan -c test-core.ini db init
           pytest --ckan-ini=test-core.ini ckan/test ckanext
