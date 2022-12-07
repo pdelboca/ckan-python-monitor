@@ -1,4 +1,4 @@
-name: CKAN 2.9
+name: CKAN 2.10
 
 on: [push]
 
@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9"]
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
       fail-fast: false
     services:
       solr:
@@ -45,10 +45,6 @@ jobs:
         run: python -c "import sys; print(sys.version)"
       - name: Clone CKAN repositry
         run: git clone https://github.com/ckan/ckan.git
-      - name: Checkout CKAN 2.9
-        run: |
-          cd ckan
-          git checkout dev-v2.9
       - name: Install requirements
         run: |
           cd ckan
