@@ -39,8 +39,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
+        run: python3 -c "import sys; print(sys.version)"
       - name: Clone CKAN repository
         run: |
-          python -c "import sys; print(sys.version)"
+          python3 -c "import sys; print(sys.version)"
           git clone https://github.com/ckan/ckan.git
