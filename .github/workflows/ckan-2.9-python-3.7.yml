@@ -10,4 +10,4 @@ jobs:
     uses: ./.github/workflows/reusable.yml
     with:
       python-version: "3.7"
-      ckan-version: "dev-2.9"
+      ckan-version: "dev-v2.9"
